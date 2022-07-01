@@ -1,0 +1,29 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: RobotoSlab, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: $background;
+  color: $text;
+  overflow: hidden;
+  font-size: xx-large;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  margin: 0;
+}
+
+@font-face {
+  font-family: RobotoSlab;
+  src: url(../public/RobotoSlab-VariableFont_wght.ttf);
+}
