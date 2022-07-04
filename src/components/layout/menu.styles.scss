@@ -1,9 +1,40 @@
-.menu-container{
-    position: absolute;
-    bottom: 0;
-    height: 12vh;
-    height: calc(var(--vh, 1vh) * 12);
-    width: 100vw;
-    width: calc(var(--vw, 1vw) * 100);
-    background-color: $lime900;
+.menu-container {
+  position: absolute;
+  bottom: 0;
+  height: 12vh;
+  height: calc(var(--vh, 1vh) * 12);
+  width: 100vw;
+  width: calc(var(--vw, 1vw) * 100);
+
+  ul {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    li{
+        background-color: $lime900;
+        height: 100%;
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-top-right-radius: 20%;
+        border-top-left-radius: 20%;
+        margin: 0 3%;
+
+        img{
+            height: 80%;
+            width: 80%;
+            object-fit: contain;
+        }
+    }
+
+    .plus-icon{
+        background-color: $background;
+        color: $lime;
+    }
+  }
 }

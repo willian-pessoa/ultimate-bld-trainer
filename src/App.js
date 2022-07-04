@@ -5,7 +5,7 @@ import Layout from "./components/layout/layout.component";
 function App() {
   return (
     <Layout>
-      Hello
+      Welcome to the Comms Reviewer
     </Layout>
   );
 }

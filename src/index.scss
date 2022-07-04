@@ -23,6 +23,12 @@ h1 {
   margin: 0;
 }
 
+ul, li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 @font-face {
   font-family: RobotoSlab;
   src: url(../public/RobotoSlab-VariableFont_wght.ttf);
