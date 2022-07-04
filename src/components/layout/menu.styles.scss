@@ -18,12 +18,17 @@
         height: 100%;
         width: 80%;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        border-top-right-radius: 20%;
-        border-top-left-radius: 20%;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
         margin: 0 3%;
+
+        .icon-name{
+          font-size: 10px;
+        }
 
         img{
             height: 80%;
