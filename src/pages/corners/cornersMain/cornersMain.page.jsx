@@ -2,13 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "./edgesMain.styles.scss";
+import "./cornersMain.styles.scss";
 
 import Button from "../../../components/button/button.component"
 
 const defaultLetterScheme = "ABCDEFGJKLMNOPQRSTUVWX";
 
-function EdgesMain() {
+function CornersMain() {
   let navigate = useNavigate();
   const [letterScheme, setLetterScheme] = useState(defaultLetterScheme);
 
@@ -27,14 +27,14 @@ function EdgesMain() {
         />
         <h6>Letter Scheme</h6>
       </div>
-      <div className="btn-edges-container">
-        <Button onClick={() => handleNavigation("/edges/edgesToReview")}>
+      <div className="btn-corners-container">
+        <Button onClick={() => handleNavigation("/corners/cornersToReview")}>
           Start Review
         </Button>
-        <Button onClick={() => handleNavigation("/edges/edgesAtNight")} >Review Before Sleep</Button>
+        <Button onClick={() => handleNavigation("/corners/cornersAtNight")} >Review Before Sleep</Button>
       </div>
     </>
   );
 }
 
-export default EdgesMain;
+export default CornersMain;
