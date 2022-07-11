@@ -18,6 +18,12 @@ export const edgesSlice = createSlice({
                 queue: addPairToQueue(state.queue, action.payload.pair, action.payload.position)
             }
         },
+        updateAllPairsStatus: (state, action) => {
+            return {
+                ...state,
+                allPairsStatus: { ...state.allPairsStatus, [action.payload.pair]: { reviewed: true, times: action.payload.times } }
+            }
+        },
         createCommsPairs: (state, action) => {
             const { allPairsToChoice, allPairsStatus } = createCommsState(action.payload);
             return {
@@ -30,6 +36,6 @@ export const edgesSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateQueue, createCommsPairs, removePair } = edgesSlice.actions
+export const { updateQueue, createCommsPairs, removePair, updateAllPairsStatus } = edgesSlice.actions
 
 export default edgesSlice.reducer

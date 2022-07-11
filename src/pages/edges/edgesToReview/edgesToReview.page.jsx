@@ -8,7 +8,7 @@ import Card from "../../../components/card/card.component";
 import Button from "../../../components/button/button.component";
 
 // redux
-import { updateQueue, removePair } from "../../../redux/edgesSlice/edgesSlice";
+import { updateQueue, removePair, updateAllPairsStatus } from "../../../redux/edgesSlice/edgesSlice";
 
 function randomItem(items) {
   return items[Math.floor(Math.random() * items.length)];
@@ -16,32 +16,55 @@ function randomItem(items) {
 
 function EdgesToReview() {
   const allPairs = useSelector((state) => state.edges.allPairsToChoice);
+  const statusAllPairs = useSelector((state) => state.edges.allPairsStatus)
   const queueOfPairs = useSelector((state) => state.edges.queue);
   const dispatch = useDispatch();
   const [currentPair, setCurrentPair] = useState("");
+  const [reviewedCurrentPair, setReviewdCurrentPair] = useState(false);
+  const [timesCurrentPair, setTimesCurrentPair] = useState(0);
 
   useEffect(() => {
-    console.log(!queueOfPairs[0]);
+    let randomPair = randomItem(allPairs);
+
     if (!queueOfPairs[0]) {
-      setCurrentPair(randomItem(allPairs));
+      setCurrentPair(randomPair);
+      setTimesCurrentPair(statusAllPairs[randomPair].times);
+      setReviewdCurrentPair(statusAllPairs[randomPair].reviewed);
     } else {
-      setCurrentPair(queueOfPairs[0]);
+      let tempCurrentPair = queueOfPairs[0];
+      setCurrentPair(tempCurrentPair);
+      setTimesCurrentPair(statusAllPairs[tempCurrentPair].times);
+      setReviewdCurrentPair(statusAllPairs[tempCurrentPair].reviewed);
     }
-  }, [queueOfPairs, allPairs]);
+
+  }, [queueOfPairs, allPairs, statusAllPairs]);
 
   const handleFeedback = (feedback) => {
+    
+    if (timesCurrentPair >= 3){
+      dispatch(updateQueue({ pair: "", position: 0 }));
+      return
+    }
+
+    try {
+      if (!reviewedCurrentPair){
+        dispatch(removePair(currentPair));
+      }
+      dispatch(updateAllPairsStatus({pair: currentPair, times:(timesCurrentPair)+1}))
+    } catch(error){
+      console.log(error);
+      return
+    }
+
     switch (feedback) {
       case "easy":
         dispatch(updateQueue({ pair: currentPair, position: 20 }));
-        dispatch(removePair(currentPair));
         break;
       case "normal":
         dispatch(updateQueue({ pair: currentPair, position: 13 }));
-        dispatch(removePair(currentPair));
         break;
       case "hard":
         dispatch(updateQueue({ pair: currentPair, position: 6 }));
-        dispatch(removePair(currentPair));
         break;
       default:
         console.log("error to update queue");
