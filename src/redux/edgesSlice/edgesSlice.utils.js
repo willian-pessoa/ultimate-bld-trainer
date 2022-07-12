@@ -7,6 +7,7 @@ export const initialState = {
   letterScheme: letterScheme.split(""),
   allPairsStatus,
   allPairsToChoice,
+  reviewBeforeSleep: [],
   queue: new Array(20).fill(""),
 }
 
@@ -49,3 +50,4 @@ export function removePairFromArray(array, pair) {
   arrayPairRemoved.splice(position, 1)
   return arrayPairRemoved
 }
+

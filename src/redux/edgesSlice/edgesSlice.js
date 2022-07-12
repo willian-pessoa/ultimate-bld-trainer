@@ -24,6 +24,18 @@ export const edgesSlice = createSlice({
                 allPairsStatus: { ...state.allPairsStatus, [action.payload.pair]: { reviewed: true, times: action.payload.times } }
             }
         },
+        addPairReviewBeforeSleep: (state, action) => {
+            return {
+                ...state,
+                reviewBeforeSleep: [...state.reviewBeforeSleep, action.payload]
+            }
+        },
+        removePairBeforeSleep: (state, action) => {
+            return {
+                ...state,
+                reviewBeforeSleep: removePairFromArray(state.reviewBeforeSleep, action.payload)
+            }
+        },
         createCommsPairs: (state, action) => {
             const { allPairsToChoice, allPairsStatus } = createCommsState(action.payload);
             return {
@@ -36,6 +48,13 @@ export const edgesSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateQueue, createCommsPairs, removePair, updateAllPairsStatus } = edgesSlice.actions
+export const {
+    updateQueue,
+    createCommsPairs,
+    removePair,
+    updateAllPairsStatus,
+    addPairReviewBeforeSleep,
+    removePairBeforeSleep
+} = edgesSlice.actions
 
 export default edgesSlice.reducer

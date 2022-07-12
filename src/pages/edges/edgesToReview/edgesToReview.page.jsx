@@ -8,16 +8,25 @@ import Card from "../../../components/card/card.component";
 import Button from "../../../components/button/button.component";
 
 // redux
-import { updateQueue, removePair, updateAllPairsStatus } from "../../../redux/edgesSlice/edgesSlice";
+import {
+  updateQueue,
+  removePair,
+  updateAllPairsStatus,
+  addPairReviewBeforeSleep,
+} from "../../../redux/edgesSlice/edgesSlice";
 
+// helpers
 function randomItem(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
 function EdgesToReview() {
   const allPairs = useSelector((state) => state.edges.allPairsToChoice);
-  const statusAllPairs = useSelector((state) => state.edges.allPairsStatus)
+  const statusAllPairs = useSelector((state) => state.edges.allPairsStatus);
   const queueOfPairs = useSelector((state) => state.edges.queue);
+  const pairsBeforeSleep = useSelector(
+    (state) => state.edges.reviewBeforeSleep
+  );
   const dispatch = useDispatch();
   const [currentPair, setCurrentPair] = useState("");
   const [reviewedCurrentPair, setReviewdCurrentPair] = useState(false);
@@ -36,24 +45,24 @@ function EdgesToReview() {
       setTimesCurrentPair(statusAllPairs[tempCurrentPair].times);
       setReviewdCurrentPair(statusAllPairs[tempCurrentPair].reviewed);
     }
-
   }, [queueOfPairs, allPairs, statusAllPairs]);
 
   const handleFeedback = (feedback) => {
-    
-    if (timesCurrentPair >= 3){
+    if (timesCurrentPair >= 3) {
       dispatch(updateQueue({ pair: "", position: 0 }));
-      return
+      return;
     }
 
     try {
-      if (!reviewedCurrentPair){
+      if (!reviewedCurrentPair) {
         dispatch(removePair(currentPair));
       }
-      dispatch(updateAllPairsStatus({pair: currentPair, times:(timesCurrentPair)+1}))
-    } catch(error){
+      dispatch(
+        updateAllPairsStatus({ pair: currentPair, times: timesCurrentPair + 1 })
+      );
+    } catch (error) {
       console.log(error);
-      return
+      return;
     }
 
     switch (feedback) {
@@ -65,6 +74,9 @@ function EdgesToReview() {
         break;
       case "hard":
         dispatch(updateQueue({ pair: currentPair, position: 6 }));
+        if (!pairsBeforeSleep || !pairsBeforeSleep.includes(currentPair)) {
+          dispatch(addPairReviewBeforeSleep(currentPair));
+        }
         break;
       default:
         console.log("error to update queue");
