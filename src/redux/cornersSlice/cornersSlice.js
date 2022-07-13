@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { initialState } from './edgesSlice.utils'
+import { initialState } from './cornersSlice.utils'
 import { addPairToQueue, removePairFromArray } from '../../utils/sliceHelpers'
 import { createCommsState } from '../../utils/createCommsState'
 
-export const edgesSlice = createSlice({
-    name: 'edges',
+export const cornersSlice = createSlice({
+    name: 'corners',
     initialState,
     reducers: {
         removePair: (state, action) => {
@@ -65,6 +65,6 @@ export const {
     addPairReviewBeforeSleep,
     removePairBeforeSleep,
     updateLetterScheme
-} = edgesSlice.actions
+} = cornersSlice.actions
 
-export default edgesSlice.reducer
+export default cornersSlice.reducer

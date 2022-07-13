@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 
 // slices
 import edgesReducer from "./edgesSlice/edgesSlice";
+import cornersSlice from "./cornersSlice/cornersSlice";
 
 const persistConfig = {
     key: "root",
@@ -11,7 +12,8 @@ const persistConfig = {
 } 
 
 const rootReducer = combineReducers({
-    edges: edgesReducer
+    edges: edgesReducer,
+    corners: cornersSlice
 })
 
 export default persistReducer(persistConfig, rootReducer)

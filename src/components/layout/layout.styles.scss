@@ -1,10 +1,14 @@
-.layout-container{
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    width: 100vw;
-    width: calc(var(--vw, 1vw) * 100);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.layout-container {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
+  width: calc(var(--vw, 1vw) * 100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: url(../../../public/static/background-mesh.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }

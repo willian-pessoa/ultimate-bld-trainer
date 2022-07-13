@@ -1,6 +1,6 @@
 import { createCommsState } from "../../utils/createCommsState"
 
-const letterScheme = "ABCDEFGJKLMNOPQRSTUVWX"
+const letterScheme = "ABCDEFGJKLMNOPRSTUVWX"
 const { allPairsToChoice, allPairsStatus } = createCommsState(letterScheme);
 
 export const initialState = {
