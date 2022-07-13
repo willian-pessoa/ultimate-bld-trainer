@@ -1,37 +1,75 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useFocus from "../../../hooks/useFocus";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./edgesMain.styles.scss";
 
-import Button from "../../../components/button/button.component"
+import { AiFillEdit } from "react-icons/ai";
+import { MdOutlineDownloadDone } from "react-icons/md";
+import Button from "../../../components/button/button.component";
 
-const defaultLetterScheme = "ABCDEFGJKLMNOPQRSTUVWX";
+//redux
+import { createCommsPairs } from "../../../redux/edgesSlice/edgesSlice"
 
 function EdgesMain() {
   let navigate = useNavigate();
-  const [letterScheme, setLetterScheme] = useState(defaultLetterScheme);
+  const letterSchemeRedux = useSelector((state) => state.edges.letterScheme);
+  const dispatch = useDispatch();
+
+  const [inputRef, setInputFocus] = useFocus();
+  const [letterScheme, setLetterScheme] = useState(letterSchemeRedux.join(""));
+  const [isToEdit, setIsToEdit] = useState(true);
 
   const handleNavigation = (path) => {
     navigate(path);
+  };
+
+  const handleLetterScheme = () => {
+    // to edit
+    setIsToEdit((prev) => !prev);
+    setTimeout(() => {
+      setInputFocus();
+    }, 100);
+
+    // dispatch to redux
+    if (!isToEdit) {
+      if (letterScheme !== letterSchemeRedux.join("")){
+        dispatch(createCommsPairs(letterScheme.split("")))
+      }
+      console.log("enviado")
+    } else {
+      console.log("não enviado")
+    }
   };
 
   return (
     <>
       <div className="letter-scheme-container">
         <input
-          disabled
+          ref={inputRef}
+          className={!isToEdit ? "input-edit" : null}
+          disabled={isToEdit}
           type="text"
           value={letterScheme}
-          onChange={(e) => setLetterScheme(e.target.value)}
+          maxLength="25"
+          onChange={(e) => setLetterScheme(e.target.value.toUpperCase())}
         />
-        <h6>Letter Scheme</h6>
+        <div className="wrapper-text-letterScheme">
+          <h6>Letter Scheme</h6>
+          <div onClick={() => handleLetterScheme()} className="btn-edit">
+            {isToEdit ? <AiFillEdit /> : <MdOutlineDownloadDone />}
+          </div>
+        </div>
       </div>
       <div className="btn-edges-container">
         <Button onClick={() => handleNavigation("/edges/edgesToReview")}>
           Start Review
         </Button>
-        <Button onClick={() => handleNavigation("/edges/edgesAtNight")} >Review Before Sleep</Button>
+        <Button onClick={() => handleNavigation("/edges/edgesAtNight")}>
+          Review Before Sleep
+        </Button>
       </div>
     </>
   );

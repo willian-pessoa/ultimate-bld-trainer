@@ -42,8 +42,10 @@ export const edgesSlice = createSlice({
                 ...state,
                 allPairsStatus,
                 allPairsToChoice,
+                reviewBeforeSleep: [],
+                queue: new Array(20).fill(""),
             }
-        }
+        },
     }
 })
 

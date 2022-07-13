@@ -11,9 +11,26 @@
   background-color: $lime900;
   padding: 5px 15px;
   border-radius: 15px;
+  z-index: 10;
+
+  .wrapper-text-letterScheme{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn-edit{
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      text-align: center;
+    }
+  }
 
   h6 {
     padding-top: 5px;
+    margin: 0 20px;
   }
 
   input {
@@ -27,5 +44,10 @@
     background-color: $lime800;
     color: $text;
     font-size: 14px;
+  }
+
+  .input-edit{
+    background-color: #ffbfaa;
+    color:black;
   }
 }
