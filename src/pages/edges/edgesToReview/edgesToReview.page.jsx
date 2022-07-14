@@ -13,6 +13,7 @@ import {
   removePair,
   updateAllPairsStatus,
   addPairReviewBeforeSleep,
+  shiftQueue,
 } from "../../../redux/edgesSlice/edgesSlice";
 
 // helpers
@@ -31,10 +32,22 @@ function EdgesToReview() {
   const [currentPair, setCurrentPair] = useState("");
   const [reviewedCurrentPair, setReviewdCurrentPair] = useState(false);
   const [timesCurrentPair, setTimesCurrentPair] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
-    let randomPair = randomItem(allPairs);
+    let randomPair = "";
 
+    if (allPairs[0]) {
+      randomPair = randomItem(allPairs);
+    } else {
+      if (!queueOfPairs[0] && queueOfPairs.find((element) => element)) {
+        dispatch(shiftQueue());
+        return;
+      } else {
+        setIsFinished(true);
+        return;
+      }
+    }
     if (!queueOfPairs[0]) {
       setCurrentPair(randomPair);
       setTimesCurrentPair(statusAllPairs[randomPair].times);
@@ -85,12 +98,18 @@ function EdgesToReview() {
 
   return (
     <div className="edges-to-review-container">
-      <Card pair={currentPair} />
-      <div className="btn-edges-wrapper">
-        <Button onClick={() => handleFeedback("easy")}>Easy</Button>
-        <Button onClick={() => handleFeedback("normal")}>Normal</Button>
-        <Button onClick={() => handleFeedback("hard")}>Hard</Button>
-      </div>
+      {isFinished ? (
+        <p>Good, you are reviewed all pairs</p>
+      ) : (
+        <>
+          <Card pair={currentPair} />
+          <div className="btn-edges-wrapper">
+            <Button onClick={() => handleFeedback("easy")}>Easy</Button>
+            <Button onClick={() => handleFeedback("normal")}>Normal</Button>
+            <Button onClick={() => handleFeedback("hard")}>Hard</Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

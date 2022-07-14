@@ -52,6 +52,14 @@ export const edgesSlice = createSlice({
                 ...state,
                 letterScheme: action.payload.split("")
             }
+        },
+        shiftQueue: state => {
+            let tempArr = [...state.queue];
+            tempArr.shift();
+            return{
+                ...state,
+                queue: tempArr
+            }
         }
     }
 })
@@ -64,7 +72,8 @@ export const {
     updateAllPairsStatus,
     addPairReviewBeforeSleep,
     removePairBeforeSleep,
-    updateLetterScheme
+    updateLetterScheme,
+    shiftQueue
 } = edgesSlice.actions
 
 export default edgesSlice.reducer

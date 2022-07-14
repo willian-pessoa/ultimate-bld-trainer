@@ -11,7 +11,10 @@ import { MdOutlineDownloadDone } from "react-icons/md";
 import Button from "../../../components/button/button.component";
 
 //redux
-import { createCommsPairs, updateLetterScheme } from "../../../redux/cornersSlice/cornersSlice";
+import {
+  createCommsPairs,
+  updateLetterScheme,
+} from "../../../redux/cornersSlice/cornersSlice";
 
 function CornersMain() {
   let navigate = useNavigate();
@@ -37,11 +40,8 @@ function CornersMain() {
     if (!isToEdit) {
       if (letterScheme !== letterSchemeRedux.join("")) {
         dispatch(createCommsPairs(letterScheme.split("")));
-        dispatch(updateLetterScheme(letterScheme))
+        dispatch(updateLetterScheme(letterScheme));
       }
-      console.log("enviado");
-    } else {
-      console.log("não enviado");
     }
   };
 
