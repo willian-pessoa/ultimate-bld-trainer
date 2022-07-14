@@ -6,6 +6,10 @@
   width: 100vw;
   width: calc(var(--vw, 1vw) * 100);
 
+  @include desktop{
+    width: 400px;
+  }
+
   ul {
     height: 100%;
     width: 100%;

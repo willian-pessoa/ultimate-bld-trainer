@@ -8,6 +8,13 @@ body {
   color: $text;
   overflow: hidden;
   font-size: xx-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../public/static/background-mesh.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 a {
