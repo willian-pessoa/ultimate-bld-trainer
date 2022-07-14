@@ -4,6 +4,12 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+
+  .info-tooltip{
+    cursor: pointer;
+    margin: 3px;
+    color: $lime;
+  }
 }
 
 .letter-scheme-container {
@@ -12,6 +18,7 @@
   padding: 5px 15px;
   border-radius: 15px;
   z-index: 10;
+  margin-top: 30px;
 
   .wrapper-text-letterScheme{
     display: flex;

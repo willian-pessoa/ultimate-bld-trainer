@@ -6,9 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import "./edgesMain.styles.scss";
 
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEdit, AiOutlineInfoCircle } from "react-icons/ai";
 import { MdOutlineDownloadDone } from "react-icons/md";
 import Button from "../../../components/button/button.component";
+
+import DialogBox from "../../../components/dialog-box/dialog-box.component";
 
 //redux
 import {
@@ -25,10 +27,21 @@ function EdgesMain() {
   const [letterScheme, setLetterScheme] = useState(letterSchemeRedux.join(""));
   const [isToEdit, setIsToEdit] = useState(true);
 
+  //dialog Box
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  //navigation
   const handleNavigation = (path) => {
     navigate(path);
   };
 
+  //letteScheme
   const handleLetterScheme = () => {
     // to edit
     setIsToEdit((prev) => !prev);
@@ -71,6 +84,22 @@ function EdgesMain() {
         <Button onClick={() => handleNavigation("/edges/edgesAtNight")}>
           Review Before Sleep
         </Button>
+        <AiOutlineInfoCircle onClick={handleClickOpen} className="info-tooltip" />
+        <DialogBox open={open} onClose={handleClose}>
+          <h6>Start Review</h6>
+          <p>
+            In the Start Review option, the user will be presenting a pair of
+            letters, it is recommended to run the commutator 3 times and choose
+            the best feedback option between, if it was easy, normal or hard to
+            remember.
+          </p>
+          <h6>Review Before Sleep</h6>
+          <p>
+            Difficult pairs will be added to the list to review at night, it is
+            recommended before bed to review all pairs in this list to help fix
+            it better.
+          </p>
+        </DialogBox>
       </div>
     </>
   );

@@ -1,9 +1,29 @@
-import React from 'react'
+import React from "react";
+import "./dialog-box.styles.scss";
 
-function DialogBox() {
+import Button from "../button/button.component";
+
+function DialogBox({ children, ...props }) {
+  const { open, onClose } = props;
+
+  const handleClose = () => {
+    onClose()
+  };
+
   return (
-    <div>DialogBox</div>
-  )
+    <>
+      {open ? (
+        <div className="dialog-box-container">
+          <div className="dialog-box-content">
+            {children}
+            <Button onClick={handleClose}>Ok</Button>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
+  );
 }
 
-export default DialogBox
+export default DialogBox;

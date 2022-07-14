@@ -100,7 +100,8 @@ function CornersToReview() {
   return (
     <div className="corners-to-review-container">
       {isFinished ? (
-        <p>Good, you are reviewed all pairs</p>
+        <p>
+        Good, you reviewed all the pairs !!!</p>
       ) : (
         <>
           <Card pair={currentPair} />
