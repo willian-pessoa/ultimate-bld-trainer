@@ -1,0 +1,15 @@
+.home-page-container {
+  height: 50%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .description-home-page {
+    text-align: justify;
+
+    p{
+        font-size: 20px;
+    }
+  }
+}
