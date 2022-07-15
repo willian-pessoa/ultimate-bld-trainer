@@ -2,7 +2,7 @@
 
 This project was created to help memorize commutators, and do smart reviews.
 
-Demo: link here
+## Demo: https://comms-reviewer.netlify.app/
 
 ### Edges and Corners Pages
 
